@@ -1,4 +1,4 @@
-1. Inställning MySQL
+1. Installning MySQL
 
 (base) annaniukkanen@Annas-Air ~ % brew install mysql
 Updating Homebrew...
@@ -37,4 +37,57 @@ Creating and writting credentials into .my.cnf-file:
 (base) annaniukkanen@Annas-Air /etc % sudo nano my.cnf
 
 
-2.
+2. Creating database example, locating table users with two columns: id and name:
+
+mysql> DESCRIBE users;
++-------+-----------------+------+-----+---------+----------------+
+| Field | Type            | Null | Key | Default | Extra          |
++-------+-----------------+------+-----+---------+----------------+
+| id    | bigint unsigned | NO   | PRI | NULL    | auto_increment |
+| name  | varchar(255)    | NO   | UNI | NULL    |                |
++-------+-----------------+------+-----+---------+----------------+
+2 rows in set (0.21 sec)
+
+
+3. Creating dump of example-database:
+
+(base) annaniukkanen@Annas-Air MySQL % mysqldump example 
+
+
+(base) annaniukkanen@Annas-Air MySQL % mysqldump example > example.sql
+
+
+Creating a new database sample:
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| example            |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sample             |
+| sys                |
++--------------------+
+6 rows in set (0.08 sec)
+
+Then adding a dump into the new database sample:
+
+(base) annaniukkanen@Annas-Air MySQL % mysql sample < example.sql   
+
+Check the sample-database:
+
+mysql> show tables;
++------------------+
+| Tables_in_sample |
++------------------+
+| users            |
++------------------+
+1 row in set (0.00 sec)  
+
+
+4. Dump only first 100 rows of help-keyword-table in mysql-database:
+
+(base) annaniukkanen@Annas-Air MySQL % mysqldump mysql help_keyword --where="true limit 100" > mysql_help_keyword.sql
+
