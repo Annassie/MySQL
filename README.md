@@ -14,3 +14,4 @@ This include tables like
 - media_types
 
 
+![alt text](https://github.com/Annassie/MySQL/blob/task_3/vk2021.png)
