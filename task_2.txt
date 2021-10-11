@@ -1,0 +1,93 @@
+1. Installning MySQL
+
+(base) annaniukkanen@Annas-Air ~ % brew install mysql
+Updating Homebrew...
+==> Auto-updated Homebrew!
+Updated 1 tap (homebrew/core).
+==> New Formulae
+
+Inställning password fot root-user:
+
+(base) annaniukkanen@Annas-Air ~ % mysql -u root
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 12
+Server version: 8.0.26 Homebrew
+
+Copyright (c) 2000, 2021, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> ALTER USER 'root'@'localhost' IDENTIFIED BY '*******';
+Query OK, 0 rows affected (0.25 sec)
+
+mysql> exit;
+
+(base) annaniukkanen@Annas-Air ~ % mysql -u root -p     
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 15
+Server version: 8.0.26 Homebrew
+
+Creating and writting credentials into .my.cnf-file:
+
+(base) annaniukkanen@Annas-Air /etc % sudo nano my.cnf
+
+
+2. Creating database example, locating table users with two columns: id and name:
+
+mysql> DESCRIBE users;
++-------+-----------------+------+-----+---------+----------------+
+| Field | Type            | Null | Key | Default | Extra          |
++-------+-----------------+------+-----+---------+----------------+
+| id    | bigint unsigned | NO   | PRI | NULL    | auto_increment |
+| name  | varchar(255)    | NO   | UNI | NULL    |                |
++-------+-----------------+------+-----+---------+----------------+
+2 rows in set (0.21 sec)
+
+
+3. Creating dump of example-database:
+
+(base) annaniukkanen@Annas-Air MySQL % mysqldump example 
+
+
+(base) annaniukkanen@Annas-Air MySQL % mysqldump example > example.sql
+
+
+Creating a new database sample:
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| example            |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sample             |
+| sys                |
++--------------------+
+6 rows in set (0.08 sec)
+
+Then adding a dump into the new database sample:
+
+(base) annaniukkanen@Annas-Air MySQL % mysql sample < example.sql   
+
+Check the sample-database:
+
+mysql> show tables;
++------------------+
+| Tables_in_sample |
++------------------+
+| users            |
++------------------+
+1 row in set (0.00 sec)  
+
+
+4. Dump only first 100 rows of help-keyword-table in mysql-database:
+
+(base) annaniukkanen@Annas-Air MySQL % mysqldump mysql help_keyword --where="true limit 100" > mysql_help_keyword.sql
+
