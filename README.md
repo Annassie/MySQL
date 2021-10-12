@@ -13,7 +13,7 @@ Here will be presented tasks related to the MySQL-course at Geek Brains online u
 
 ### Task 4
 
--CRUD-opertaions
+- CRUD-opertaions
 
 ### Task 
 
@@ -36,4 +36,3 @@ Here will be presented tasks related to the MySQL-course at Geek Brains online u
 ### Task 10
 
 
-### Task 
